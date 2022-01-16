@@ -1,0 +1,20 @@
+@using Treats.Models;
+
+<h2>Flavors</h2>
+
+@if(Model.Count == 0)
+{
+  <p>You have not created any flavors yet!</p>
+}
+else
+{
+  <ul>
+    @foreach(Flavor flavor in Model)
+    {
+      <li>@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId })</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add new Flavor", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

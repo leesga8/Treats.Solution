@@ -11,7 +11,7 @@ namespace Treats
   {
     private readonly TreatsContext _db;
 
-    public EngineersController(TreatsContext db)
+    public FlavorsController (TreatsContext db)
     {
       _db = db;
     }
