@@ -1,0 +1,48 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script:wght@500&family=Great+Vibes&family=Outfit:wght@800&display=swap');
+ul {
+  list-style: none;
+  padding: 0;
+}
+/* 
+a {
+  color: rgb(49, 54, 45);
+  text-decoration: none;
+  font-size: 1.2rem;
+} */
+
+#nav-ul {
+  display: flex;
+}
+
+.nav-logo {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 2rem;
+  font-family: 'Great Vibes', cursive;
+}
+
+#nav-li-start {
+  margin-left: auto;
+}
+
+.nav-li{
+  padding: 1rem;
+}
+
+nav li a {
+  font-size: 1.8rem;
+  color: rgb(0, 58, 249);
+  text-decoration: none;
+  font-family: 'Bad Script', cursive;
+
+}
+
+nav li a:hover {
+  border-top: .5em solid rgb(49, 54, 45);
+  padding-top: .3em;
+  color: rgb(0, 58, 249);
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: 'Great Vibes', cursive;
+}

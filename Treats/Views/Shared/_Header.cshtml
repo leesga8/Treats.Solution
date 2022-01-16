@@ -1,0 +1,32 @@
+@* <nav class="navbar navbar-expand-lg sticky-top">
+  
+  <li class="navbar-brand">Pierre's Treats & Flavors</li>
+
+  <ul id="nav-ul">
+    <li class="nav-li-start">@Html.ActionLink("Home", "Index", "Home")</li>
+    <li class="nav-li">@Html.ActionLink("Treats", "Index", "Treats")</li>
+    <li class="nav-li">@Html.ActionLink("Flavors", "Index", "Flavors")</li>
+  </ul>
+</nav> *@
+
+
+   
+<nav class=" sticky-top" style="background-color: #e3f2fd;">
+  <ul id="nav-ul">
+    <li class="nav-logo">
+      <p>Pierre's Treats & Flavors</p>
+    </li>
+    <li id="nav-li-start" class="nav-li">
+      <p>@Html.ActionLink("Home", "Index", "Home")</p>
+    </li>    
+    <li class="nav-li">
+      <p>@Html.ActionLink("Account", "Index", "Account")</p>
+    </li>
+    <li class="nav-li">
+      <p>@Html.ActionLink("Treats", "Index", "Treats")</p>
+    </li>
+    <li class="nav-li"> 
+      <p>@Html.ActionLink("Flavors", "Index", "Flavors")</p>
+    </li>
+  </ul>
+</nav>

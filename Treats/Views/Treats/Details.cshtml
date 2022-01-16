@@ -20,13 +20,13 @@ else
     {
       @Html.Hidden("joinId", @join.FlavorTreatId)
       @Html.Hidden("treatId", @Model.TreatId)
-      <input type="submit" value="Delete" />
+      <input type="submit" value="Delete" class="btn btn-primary" />
     }
   }
   </ul>
 }
 
-<p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Add a Flavor to this Treat", "AddFlavor", new { id = Model.TreatId })</p>
 <hr />
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
