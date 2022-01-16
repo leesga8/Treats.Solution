@@ -24,22 +24,32 @@ namespace Treats
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc();
-      
+
       services.AddEntityFrameworkMySql()
-      
+
         .AddDbContext<TreatsContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
-      
-       services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<TreatsContext>()
-                .AddDefaultTokenProviders();
+
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+               .AddEntityFrameworkStores<TreatsContext>()
+               .AddDefaultTokenProviders();
+
+      services.Configure<IdentityOptions>(options =>
+      {
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 0;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredUniqueChars = 0;
+      });
     }
 
     public void Configure(IApplicationBuilder app)
     {
       app.UseDeveloperExceptionPage();
 
-      app.UseAuthentication(); 
+      app.UseAuthentication();
 
       app.UseRouting();
 
@@ -51,7 +61,7 @@ namespace Treats
       });
 
       app.UseStaticFiles();
-      
+
       app.Run(async (context) =>
       {
         await context.Response.WriteAsync("Error!");
