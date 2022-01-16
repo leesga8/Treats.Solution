@@ -22,18 +22,18 @@ namespace Treats.Controllers
     }
     public ActionResult Create()
     {
-      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+      // ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Flavor flavor, int TreatId)
+    public ActionResult Create(Flavor flavor/*, int TreatId*/)
     {
       _db.Flavors.Add(flavor);
-      _db.SaveChanges();
-      if (TreatId != 0)
-      {
-        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
-      }
+      // _db.SaveChanges();
+      // if (TreatId != 0)
+      // {
+      //   _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+      // }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -48,18 +48,33 @@ namespace Treats.Controllers
     public ActionResult Edit(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
-      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+      // ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
       return View(thisFlavor);
     }
 
     [HttpPost]
-    public ActionResult Edit(Flavor flavor, int TreatId)
+    public ActionResult Edit(Flavor flavor/*, int TreatId*/)
     {
-      if (TreatId != 0)
-      {
-        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
-      }
+      // if (TreatId != 0)
+      // {
+      //   _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+      // }
       _db.Entry(flavor).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult Delete(int id)
+    {
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+      return View(thisFlavor);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
+      _db.Flavors.Remove(thisFlavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -89,20 +104,6 @@ namespace Treats.Controllers
       return View();
     }
 
-    public ActionResult Delete(int id)
-    {
-      var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
-      return View(thisFlavor);
-    }
-
-    [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int id)
-    {
-      var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
-      _db.Flavors.Remove(thisFlavor);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
 
     [HttpPost]
     public ActionResult DeleteTreat(int joinId, int flavorId)
