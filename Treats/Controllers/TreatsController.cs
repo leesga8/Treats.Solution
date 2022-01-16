@@ -59,7 +59,30 @@ namespace Treats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
-
+    public ActionResult AddFlavor(int id)
+    {
+      var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+      return View(thisTreat);
+    }
+    [HttpPost]
+    public ActionResult AddFlavor(Treat Treat, int FlavorId)
+    {
+      bool alreadyExists = _db.FlavorTreat.Any(FlavorTreat => FlavorTreat.TreatId == Treat.TreatId && FlavorTreat.FlavorId == FlavorId);
+      if (FlavorId != 0 && !alreadyExists)
+      {
+        _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = Treat.TreatId });
+      }
+      _db.SaveChanges();
+      if (alreadyExists)
+      {
+        return RedirectToAction("AddFlavorError");
+      }
+      return RedirectToAction("Index");
+    }
+    public ActionResult AddFlavorError()
+    {
+      return View();
+    }
   }
 }
