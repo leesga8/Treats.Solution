@@ -22,7 +22,7 @@ namespace Treats.Controllers
     }
     public ActionResult Create()
     {
-      // ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+      // ViewBag.Double = str;
       return View();
     }
     [HttpPost]
