@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Treats
+namespace Treats.Controllers
 {
   public class FlavorsController : Controller
   {
@@ -17,7 +17,8 @@ namespace Treats
     }
     public ActionResult Index()
     {
-      return View(_db.Flavors.ToList());
+       List<Flavor> model = _db.Flavors.ToList();
+      return View(model);
     }
     public ActionResult Details(int id)
     {
