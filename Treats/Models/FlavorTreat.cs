@@ -1,18 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace Treats.Models
 {
-  public class TreatsContext : DbContext
-  {
-    public DbSet<Treat> Treats { get; set; }
-    public DbSet<Flavor> Flavors { get; set; }
-    public DbSet<FlavorTreat> FlavorTreat { get; set; }
-
-    public TreatsContext(DbContextOptions options) : base(options) { }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-      optionsBuilder.UseLazyLoadingProxies();
+  public class FlavorTreat
+    {       
+        public int FlavorTreatId { get; set; }
+        public int FlavorId { get; set; }
+        public int TreatId { get; set; }
+        public virtual Treat Treat { get; set; }
+        public virtual Flavor Flavor { get; set; }
     }
-  }
 }
