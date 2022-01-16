@@ -11,7 +11,7 @@ namespace Treats
   {
     private readonly TreatsContext _db;
 
-    public FlavorsController (TreatsContext db)
+    public FlavorsController(TreatsContext db)
     {
       _db = db;
     }
@@ -26,6 +26,23 @@ namespace Treats
           .ThenInclude(join => join.Treat)
           .FirstOrDefault(flavor => flavor.FlavorId == id);
       return View(thisFlavor);
+    }
+    public ActionResult Create()
+    {
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+      return View();
+    }
+    [HttpPost]
+    public ActionResult Create(Flavor flavor, int TreatId)
+    {
+      _db.Flavors.Add(flavor);
+      _db.SaveChanges();
+      if (TreatId != 0)
+      {
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
