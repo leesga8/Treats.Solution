@@ -5,7 +5,7 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
-@if(@Model.JoinEntities.Count == 0)
+@if (@Model.JoinEntities.Count == 0)
 {
   <p>This Flavor does not belong to any Treats</p>
 }
@@ -13,10 +13,16 @@ else
 {
   <h4>Flavors in this Treat:</h4>
   <ul>
-  @foreach(var join in Model.JoinEntities)
-  {
-    <li>@join.Treat.Name</li>
-  }
+  @foreach (var join in Model.JoinEntities)
+    {
+      <li>@join.Treat.Name</li>
+      @using (Html.BeginForm("DeleteTreat", "Flavors"))
+      {
+        @Html.Hidden("joinId", @join.FlavorTreatId)
+        @Html.Hidden("flavorId", @Model.FlavorId)
+        <input type="submit" value="Delete" />
+      }
+    }
   </ul>
 }
 

@@ -17,16 +17,8 @@ namespace Treats.Controllers
     }
     public ActionResult Index()
     {
-       List<Flavor> model = _db.Flavors.ToList();
+      List<Flavor> model = _db.Flavors.ToList();
       return View(model);
-    }
-    public ActionResult Details(int id)
-    {
-      var thisFlavor = _db.Flavors
-          .Include(flavor => flavor.JoinEntities)
-          .ThenInclude(join => join.Treat)
-          .FirstOrDefault(flavor => flavor.FlavorId == id);
-      return View(thisFlavor);
     }
     public ActionResult Create()
     {
@@ -44,6 +36,14 @@ namespace Treats.Controllers
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+    public ActionResult Details(int id)
+    {
+      var thisFlavor = _db.Flavors
+          .Include(flavor => flavor.JoinEntities)
+          .ThenInclude(join => join.Treat)
+          .FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
     public ActionResult Edit(int id)
     {
@@ -83,13 +83,13 @@ namespace Treats.Controllers
         return RedirectToAction("AddTreatError");
       }
       return RedirectToAction("Index");
-    }    
+    }
     public ActionResult AddTreatError()
     {
       return View();
     }
 
-    public ActionResult Delete (int id)
+    public ActionResult Delete(int id)
     {
       var thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
       return View(thisFlavor);
@@ -102,6 +102,15 @@ namespace Treats.Controllers
       _db.Flavors.Remove(thisFlavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public ActionResult DeleteTreat(int joinId, int flavorId)
+    {
+      var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreat.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = flavorId });
     }
   }
 }
