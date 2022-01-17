@@ -4,17 +4,27 @@ using Treats.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Treats.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly TreatsContext _db;
 
-    public FlavorsController(TreatsContext db)
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public FlavorsController(UserManager<ApplicationUser> userManager, TreatsContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
+
+    [AllowAnonymous]
     public ActionResult Index()
     {
       List<Flavor> model = _db.Flavors.ToList();
@@ -26,17 +36,13 @@ namespace Treats.Controllers
       return View();
     }
     [HttpPost]
-    public ActionResult Create(Flavor flavor/*, int TreatId*/)
+    public ActionResult Create(Flavor flavor)
     {
       _db.Flavors.Add(flavor);
-      // _db.SaveChanges();
-      // if (TreatId != 0)
-      // {
-      //   _db.FlavorTreat.Add(new FlavorTreat() { TreatId = TreatId, FlavorId = flavor.FlavorId });
-      // }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisFlavor = _db.Flavors
