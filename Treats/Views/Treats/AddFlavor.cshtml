@@ -1,17 +1,15 @@
 @model Treats.Models.Treat
 
-<h2>Add a flavor</h2>
-
-<h4>Add a flavor to this treat: @Html.DisplayFor(model => model.Name)</h4>
-
+<h2>Add a flavor to this treat:</h2>
+<h2  class="detDis">@Html.DisplayFor(model => model.Name)</h2>
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.TreatId)
-
-    @Html.Label("Select flavor")
+    <p>
+    @Html.Label("Select Flavor"):
     @Html.DropDownList("FlavorId")
-
-    <input type="submit" value="Save" />
+    </p>
+    <input type="submit" value="Save" class="btn btn-lg btn-info" />
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>

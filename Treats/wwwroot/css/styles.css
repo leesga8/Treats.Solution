@@ -91,16 +91,27 @@ h3 {
 .homelink a:hover{
   color:rgb(20, 141, 249);
   border-top: solid rgb(0, 141, 249);
-  padding-top: .05em;
+  padding-top: 4px;
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
 
-.index-ul
-{
-  text-decoration: none;
+.index-ul a {
+  color: rgb(0, 143, 0);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+.index-ul a:hover{
+  color: rgb(0, 141, 249);
+  font-weight: bold;
 }
 
 .noCount {
   color: rgb(0, 143, 0);
+}
+
+.detDis{
+  color:rgb(0, 143, 0);
+  text-decoration: none;
 }

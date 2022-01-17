@@ -1,9 +1,8 @@
-@using Treats.Models
 @model Treats.Models.Flavor
 
 <h2>Flavor Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h2 class="detDis">@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h2>
 
 @if (@Model.JoinEntities.Count == 0)
 {
@@ -11,7 +10,7 @@
 }
 else
 {
-  <h4>Treats that have this Flavor:</h4>
+  <h3>Treats that have this Flavor:</h3>
   <ul>
   @foreach (var join in Model.JoinEntities)
     {
