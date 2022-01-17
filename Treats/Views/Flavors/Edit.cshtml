@@ -2,16 +2,17 @@
 
 <h2>Edit</h2>
 
-<h4>Edit this Flavor: @Html.DisplayFor(model => model.Name)</h4>
-
+<h3>Edit this Flavor: @Html.DisplayFor(model => model.Name)</h3>
+<hr />
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.FlavorId)
 
-    @Html.LabelFor(model => model.Name)
+    <p>
+    @Html.LabelFor(model => model.Name):
     @Html.EditorFor(model => model.Name)
-
-    <input type="submit" value="Save" />
+    </p>
+    <input type="submit" value="Save" class="btn btn-info" />
 }
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Back to Flavors", "Index")</p>

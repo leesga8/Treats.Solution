@@ -1,13 +1,14 @@
 @model Treats.Models.Treat
 
-<h4>Add a new Treat</h4>
-
+<h3>Create a Treat!</h3>
+<hr />
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Name)
+    <p>
+    @Html.LabelFor(model => model.Name):
     @Html.TextBoxFor(model => model.Name)
+    </p>
 
-
-    <input type="submit" value="Add new Treat" class="btn btn-primary" />
+    <input type="submit" value="Add new Treat" class="btn btn-lg btn-info" />
 }
 <p>@Html.ActionLink("Show all Treats", "Index")</p>
